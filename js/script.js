@@ -54,7 +54,6 @@ function movieCards(data) {
     movie.append(movieInfo);
     movieInfo.append(movieTitle, divRating);
     divRating.append(imgRating, movieRating);
-    console.log(movieInfo);
 
     movie.id = element.id;
 
