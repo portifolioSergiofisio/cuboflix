@@ -7,6 +7,15 @@ const modal = document.querySelector(".modal");
 const modalBody = document.querySelector(".modal__body");
 const themeBtn = document.querySelector(".btn-theme");
 
+const videoHighlight = document.querySelector(".highlight__video");
+const titleHighlight = document.querySelector(".highlight__title");
+const ratingHighlight = document.querySelector(".highlight__rating");
+const genresHighlight = document.querySelector(".highlight__genres");
+const dateHighlight = document.querySelector(".highlight__launch");
+const descriptionHighlight = document.querySelector(".highlight__description");
+const linkVideoHighlight = document.querySelector(".highlight__video-link");
+const play = document.querySelector(".play");
+
 const imgLogo = document.createElement("img");
 const h1Logo = document.createElement("h1");
 const btnClose = document.createElement("img");
@@ -28,36 +37,39 @@ function movieCards(data) {
   const arrayFilms = data.data.results;
 
   arrayFilms.forEach((element) => {
-    const Movie = document.createElement("div");
-    const MovieInfo = document.createElement("div");
-    const MovieTitle = document.createElement("span");
-    const MovieRating = document.createElement("span");
-    const rating = document.createElement("img");
+    const movie = document.createElement("div");
+    const movieInfo = document.createElement("div");
+    const movieTitle = document.createElement("span");
+    const divRating = document.createElement("div");
+    const movieRating = document.createElement("span");
+    const imgRating = document.createElement("img");
 
-    Movie.classList.add("movie");
-    MovieInfo.classList.add("movie__info");
-    MovieTitle.classList.add("movie__title");
-    MovieRating.classList.add("movie__rating");
+    movie.classList.add("movie");
+    movieInfo.classList.add("movie__info");
+    movieTitle.classList.add("movie__title");
+    movieRating.classList.add("movie__rating");
+    divRating.classList.add("display-flex");
 
-    Movie.append(MovieInfo);
-    MovieInfo.append(MovieTitle, MovieRating);
-    MovieRating.append(rating);
-    movies.append(Movie);
+    movies.append(movie);
+    movie.append(movieInfo);
+    movieInfo.append(movieTitle, divRating);
+    divRating.append(imgRating, movieRating);
+    console.log(movieInfo);
 
-    Movie.id = element.id;
+    movie.id = element.id;
 
-    MovieTitle.textContent = element.title;
-    MovieRating.textContent = element.vote_average.toFixed(1);
+    movieTitle.textContent = element.title;
+    movieRating.textContent = element.vote_average.toFixed(1);
 
     if (!element.poster_path) {
-      Movie.style.backgroundImage = `url(./assets/noposter.jpg)`;
+      movie.style.backgroundImage = `url(./assets/noposter.jpg)`;
     } else {
-      Movie.style.backgroundImage = `url(${element.poster_path})`;
+      movie.style.backgroundImage = `url(${element.poster_path})`;
     }
-    rating.src = "./assets/estrela.svg";
-    rating.alt = "Star";
+    imgRating.src = "./assets/estrela.svg";
+    imgRating.alt = "Star";
 
-    Movie.addEventListener("click", (event) => {
+    movie.addEventListener("click", (event) => {
       displayModal(event.target);
       modal.classList.remove("hidden");
     });
@@ -65,19 +77,7 @@ function movieCards(data) {
 }
 
 function highlight() {
-  const random = Math.floor(Math.random() * 4);
-
-  const videoHighlight = document.querySelector(".highlight__video");
-  const titleHighlight = document.querySelector(".highlight__title");
-  const ratingHighlight = document.querySelector(".highlight__rating");
-  const genresHighlight = document.querySelector(".highlight__genres");
-  const dateHighlight = document.querySelector(".highlight__launch");
-  const descriptionHighlight = document.querySelector(
-    ".highlight__description"
-  );
-  const linkVideoHighlight = document.querySelector(".highlight__video-link");
-
-  const play = document.querySelector(".play");
+  const random = Math.floor(Math.random() * 5);
 
   async function site() {
     try {
@@ -160,6 +160,7 @@ function changeTheme() {
 function darkMode() {
   imgLogo.src = "./assets/logo.svg";
   themeBtn.src = "./assets/dark-mode.svg";
+  play.src = "./assets/play-white.svg";
   root.style.setProperty("--background", "#000000");
   root.style.setProperty("--input-color", "#3e434d");
   root.style.setProperty("--text-color", "#ffffff");
@@ -170,6 +171,7 @@ function darkMode() {
 function lighMode() {
   imgLogo.src = "./assets/logo-dark.png";
   themeBtn.src = "./assets/light-mode.svg";
+  play.src = "./assets/play-dark.svg";
   root.style.setProperty("--background", "#ffff");
   root.style.setProperty("--input-color", "#979797");
   root.style.setProperty("--text-color", "#1b2028");
