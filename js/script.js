@@ -200,7 +200,7 @@ async function displayModal(movie) {
   modalAverage.classList.add("modal__average");
   modalPlay.classList.add("play");
 
-  modalPlay.src = "./assets/play.svg";
+  modalPlay.src = "./assets/play-white.svg";
 
   btnClose.alt = "Close";
   modalPlay.alt = "Play";
