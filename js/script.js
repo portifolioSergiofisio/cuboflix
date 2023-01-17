@@ -7,6 +7,7 @@ const modal = document.querySelector(".modal");
 const modalBody = document.querySelector(".modal__body");
 const themeBtn = document.querySelector(".btn-theme");
 
+const highlightVideo = document.querySelector(".highlight-video");
 const videoHighlight = document.querySelector(".highlight__video");
 const titleHighlight = document.querySelector(".highlight__title");
 const ratingHighlight = document.querySelector(".highlight__rating");
@@ -115,6 +116,10 @@ function highlight() {
         .join(", ");
 
       if (video.data.results.length === 0) {
+        highlightVideo.removeChild(linkVideoHighlight);
+        const div = document.createElement("div");
+
+        highlightVideo.insertBefore(videoHighlight, highlightVideo.firstChild);
         videoHighlight.removeChild(play);
       } else {
         linkVideoHighlight.href = `https://www.youtube.com/watch?v=${video.data.results[0].key}`;
@@ -200,7 +205,7 @@ async function displayModal(movie) {
   modalAverage.classList.add("modal__average");
   modalPlay.classList.add("play");
 
-  modalPlay.src = "./assets/play.svg";
+  modalPlay.src = "./assets/play-white.svg";
 
   btnClose.alt = "Close";
   modalPlay.alt = "Play";

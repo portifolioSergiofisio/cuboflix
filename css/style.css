@@ -180,7 +180,8 @@
   margin-bottom: 16px;
 }
 
-.highlight {
+.highlight,
+.highlight-video {
   display: flex;
   gap: 16px;
 
